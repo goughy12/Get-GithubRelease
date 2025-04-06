@@ -168,7 +168,6 @@ function Get-GithubRelease {
             foreach ($item in $release.assets) {
                 Write-Host "   -Asset `"$($item.name)`""
             }
-            Write-Host "`n   Refine the asset pattern using the Asset parameter.`n"
             return
         }
 
