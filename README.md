@@ -15,7 +15,7 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 
 -DownloadFolder <string>    The folder where the downloaded asset will be saved. (Default: current directory)
 
--Extract <bool>             Indicates whether to extract the release asset (if applicable). (Default: True)
+-Extract <bool>             When true, extract the release asset (if applicable). (Default: True)
 
 -SevenZipPath <string>      The path to the 7-Zip executable. (Default: "C:\Program Files\7-Zip\7z.exe")
 
