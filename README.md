@@ -5,35 +5,23 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 ## Parameters
 
 ```
--Repo <string>     The GitHub repository in the format "owner/repo".
+-Repo <string>              The GitHub repository in the format "owner/repo".
 
--List              When provided, lists all GitHub release tags and available assets, then exits.
+-List                       When provided, lists all GitHub release tags and available assets, then exits.
 
--Asset <string>    The asset name or wildcard pattern to download. (Default: "*")
+-Asset <string>             The asset name or wildcard pattern to download. (Default: "*")
 
--ReleaseTag <string>
-Default: "latest"
-The release tag to use. If "latest" is specified, the latest release is retrieved.
+-ReleaseTag <string>        The release tag to use. If "latest" is specified, the latest release is retrieved. (Default: "latest")
 
--DownloadFolder <string>
-Default: current directory
-The folder where the downloaded asset will be saved.
+-DownloadFolder <string>    The folder where the downloaded asset will be saved. (Default: current directory)
 
--Extract <bool>
-Default: True
-Indicates whether to extract the release asset if it is an archive.
+-Extract <bool>             Indicates whether to extract the release asset if it is an archive. (Default: True)
 
--SevenZipPath <string>
-Default: "C:\Program Files\7-Zip\7z.exe"
-The path to the 7-Zip executable.
+-SevenZipPath <string>      The path to the 7-Zip executable. (Default: "C:\Program Files\7-Zip\7z.exe")
 
--ExtractFolder <string>
-Default: "$DownloadFolder\<repo-name>"
-The folder where the asset will be extracted if it's an archive.
+-ExtractFolder <string>     The folder where the asset will be extracted if it's an archive. (Default: "$DownloadFolder\<repo-name>")
 
--DeleteArchive <bool>
-Default: True
-When true, deletes the downloaded archive file after extraction (if applicable).
+-DeleteArchive <bool>       When true, deletes the downloaded archive file after extraction (if applicable). (Default: True)
 ```
 
 ## Examples
