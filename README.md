@@ -5,7 +5,8 @@ Examples:
 1. Get the latest release asset matching the wildcard pattern:
 ```
 Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
-
+```
+```
 [INFO] Parameters:
 
    Repo:           ffuf/ffuf
@@ -39,7 +40,8 @@ Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
 2. Get the release asset matching the wildcard pattern for a specific release tag:
 ```
 Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip" -ReleaseTag "v2.0.0"
-
+```
+```
 [INFO] Parameters:
 
    Repo:           ffuf/ffuf
@@ -72,7 +74,8 @@ Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip" -ReleaseTa
 3. List all release tags and available assets:
 ```
 Get-GithubRelease -Repo "ffuf/ffuf" -List
-
+```
+```
 [INFO] Parameters:
 
    Repo:           ffuf/ffuf
