@@ -5,23 +5,23 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 ## Parameters
 
 ```
--Repo <string>              The GitHub repository in the format "owner/repo".
+-Repo <string>                                                       The GitHub repository in the format "owner/repo".
 
--List                       When provided, lists all GitHub release tags and available assets, then exits.
+-List                                                                When provided, lists all GitHub release tags and available assets, then exits.
 
--Asset <string>             The asset name or wildcard pattern to download. (Default: "*")
+-Asset <string> [Default: "*"]                                       The asset name or wildcard pattern to download. 
 
--ReleaseTag <string>        The release tag to use. If "latest" is specified, the latest release is retrieved. (Default: "latest")
+-ReleaseTag <string> [Default: "latest"]                             The release tag to use. If "latest" is specified, the latest release is retrieved. 
 
--DownloadFolder <string>    The folder where the downloaded asset will be saved. (Default: current directory)
+-DownloadFolder <string> [Default: current directory]                The folder where the downloaded asset will be saved.
 
--Extract <bool>             Indicates whether to extract the release asset if it is an archive. (Default: True)
+-Extract <bool> [Default: True]                                      Indicates whether to extract the release asset if it is an archive.
 
--SevenZipPath <string>      The path to the 7-Zip executable. (Default: "C:\Program Files\7-Zip\7z.exe")
+-SevenZipPath <string> [Default: "C:\Program Files\7-Zip\7z.exe"]    The path to the 7-Zip executable. 
 
--ExtractFolder <string>     The folder where the asset will be extracted if it's an archive. (Default: "$DownloadFolder\<repo-name>")
+-ExtractFolder <string> [Default: "$DownloadFolder\<repo-name>"]     The folder where the asset will be extracted if it's an archive. 
 
--DeleteArchive <bool>       When true, deletes the downloaded archive file after extraction (if applicable). (Default: True)
+-DeleteArchive <bool> [Default: True]                                When true, deletes the downloaded archive file after extraction (if applicable). 
 ```
 
 ## Examples
