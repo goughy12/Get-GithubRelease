@@ -155,19 +155,13 @@ function Get-GithubRelease {
         # -------------------------------
         $releaseAsset = $release.assets | Where-Object { $_.name -like $Asset }
 
-        if ($releaseAsset.Count -gt 1) {
-            Write-Host "[ERROR] Multiple assets found matching '$Asset':`n"
-            Write-Host "   Repo:       $($Repo):"
-            Write-Host "   ReleaseTag: $($release.tag_name)`n"
-            Write-Host "   Available assets:`n"
-            foreach ($item in $releaseAsset) {
-                Write-Host "   $($item.name)"
+        if ($releaseAsset.Count -ne 1) {
+            if ($releaseAsset.Count -eq 0) {
+                Write-Host "[ERROR] No asset found matching '$Asset':`n"           
             }
-            Write-Host "`n   Refine the asset pattern using the Asset parameter.`n"
-            return
-        }
-        elseif ($releaseAsset.Count -eq 0) {
-            Write-Host "[ERROR] No asset found matching '$Asset':`n"
+            else {
+                Write-Host "[ERROR] Multiple assets found matching '$Asset':`n" 
+            }
             Write-Host "   Repo:       $($Repo):"
             Write-Host "   ReleaseTag: $($release.tag_name)`n"
             Write-Host "   Available assets:`n"
@@ -205,7 +199,6 @@ function Get-GithubRelease {
         # EXTRACT ASSET IF REQUIRED
         # -------------------------------
         if ($Extract -and $filename.ToLower() -match "\.(zip|7z|gz|rar|xz|bz2)$") {
-            # Check if 7-Zip is installed
             if (-not (Test-Path $SevenZipPath)) {
                 Write-Host "[ERROR] 7-Zip is not installed.`n`n   Install 7-Zip:  winget install 7zip`n"
                 return
@@ -228,7 +221,7 @@ function Get-GithubRelease {
         # -------------------------------
         # DELETE ARCHIVE IF SWITCHED ON
         # -------------------------------
-        if ($DeleteArchive -and $filename.ToLower() -match "\.(zip|7z|gz|rar|xz|bz2)$") {
+        if ($DeleteArchive) {
             try {
                 Write-Host "[INFO] Deleting:`n`n" `
                 "  Archive:        $localFile`n"
