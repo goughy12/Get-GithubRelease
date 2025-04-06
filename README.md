@@ -2,6 +2,36 @@
 
 This PowerShell function retrieves GitHub release information, downloads a specified asset, and optionally extracts it. It also lets you list all release tags and available assets.
 
+## Parameters
+```
+    .PARAMETER Repo
+        (Mandatory) [String] The GitHub repository in the format "owner/repo".
+
+    .PARAMETER Asset
+        (Optional) [String] The asset name or wildcard pattern to download.
+
+    .PARAMETER ReleaseTag
+        (Optional) [String] The release tag to use. If "latest" is specified, the latest release is retrieved.
+
+    .PARAMETER DownloadFolder
+        (Optional) [String] The folder where the downloaded asset will be saved. Defaults to the current directory.
+
+    .PARAMETER Extract
+        (Optional) [Bool] Indicates whether to extract the release asset if it is an archive.
+
+    .PARAMETER SevenZipPath
+        (Optional) [String] The path to the 7-Zip executable.
+
+    .PARAMETER ExtractFolder
+        (Optional) [String] The folder where the asset will be extracted if it's an archive.
+
+    .PARAMETER List
+        (Optional) [Switch] When provided, lists all GitHub release tags and available assets, then exits.
+
+    .PARAMETER DeleteArchive
+        (Optional) [Bool] When true, deletes the downloaded archive file after extraction (if applicable).
+```
+
 ## Examples
 
 ### Get the latest release asset matching the wildcard pattern:
