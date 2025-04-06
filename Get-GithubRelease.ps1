@@ -162,7 +162,7 @@ function Get-GithubRelease {
             else {
                 Write-Host "[ERROR] Multiple assets found matching '$Asset':`n" 
             }
-            Write-Host "   Repo:           $($Repo):"
+            Write-Host "   Repo:           $($Repo)"
             Write-Host "   ReleaseTag:     $($release.tag_name)`n"
             Write-Host "   Available assets:`n"
             foreach ($item in $release.assets) {
