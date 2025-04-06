@@ -166,7 +166,7 @@ function Get-GithubRelease {
             Write-Host "   ReleaseTag:     $($release.tag_name)`n"
             Write-Host "   Available assets:`n"
             foreach ($item in $release.assets) {
-                Write-Host "   $($item.name)"
+                Write-Host "   -Asset `"$($item.name)`""
             }
             Write-Host "`n   Refine the asset pattern using the Asset parameter.`n"
             return
