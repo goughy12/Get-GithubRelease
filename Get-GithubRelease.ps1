@@ -17,10 +17,6 @@ function Get-GithubRelease {
         This function is useful for automating the process of obtaining and processing release assets from GitHub repositories, 
         especially in deployment or build integration scenarios.
 
-    .NOTES
-        Version: 1.0
-        DateCreated: 2025-April-06
-
     .PARAMETER Repo
         (Mandatory) [String] The GitHub repository in the format "owner/repo".
         
