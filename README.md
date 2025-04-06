@@ -24,7 +24,7 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 -DeleteArchive <bool>       When true, deletes the downloaded archive file after extraction (if applicable). (Default: True)
 ```
 
-## Examples
+## Usage
 
 ### Get the latest release asset matching the wildcard pattern:
 ```
