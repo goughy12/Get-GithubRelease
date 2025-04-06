@@ -18,8 +18,6 @@ function Get-GithubRelease {
         especially in deployment or build integration scenarios.
 
     .NOTES
-        Name: Get-GithubRelease
-        Author: Adrian Gough
         Version: 1.0
         DateCreated: 2025-April-06
 
