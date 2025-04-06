@@ -7,7 +7,7 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 ```
 -Repo <string>              The GitHub repository in the format "owner/repo".
 
--List                       When provided, lists all GitHub release tags and available assets, then exits.
+-List                       When provided, lists all GitHub release tags and available assets.
 
 -Asset <string>             The asset name or wildcard pattern to download. (Default: "*")
 
