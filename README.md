@@ -1,3 +1,5 @@
+# Get-GithubRelease
+
 This PowerShell function retrieves GitHub release information, downloads a specified asset, and optionally extracts it. It also lets you list all release tags and available assets.
 
 Examples:
