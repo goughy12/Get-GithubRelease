@@ -15,18 +15,18 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 
 -DownloadFolder <string>    The folder where the asset will be saved. (Default: "<current-directory>")
 
--Extract <bool>             When true, extract the asset if it's an archive. (Default: True)
-
 -SevenZipPath <string>      The path to the 7-Zip executable. (Default: "C:\Program Files\7-Zip\7z.exe")
 
--ExtractFolder <string>     The folder where the asset will be extracted. (Default: "<current-directory>\<repo-name>")
+-ExtractArchive <bool>      When true, extract the asset if it's an archive. (Default: True)
+
+-ExtractFolder <string>     The folder where the asset will be extracted. (Default: "DownloadFolder\<repo-name>")
 
 -DeleteArchive <bool>       When true, deletes the asset after extraction. (Default: True)
 ```
 
 ## Usage
 
-### 1. Get the latest release asset matching the pattern:
+### 1. Get the asset matching the pattern for the latest release:
 ```
 Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
 ```
@@ -38,8 +38,8 @@ Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
    Asset:          ffuf_*_windows_amd64.zip
    ReleaseTag:     latest
    DownloadFolder: C:\Users\user
-   Extract:        True
    SevenZipPath:   C:\Program Files\7-Zip\7z.exe
+   ExtractArchive: True
    ExtractFolder:  C:\Users\user\ffuf
    DeleteArchive:  True
 
@@ -54,14 +54,14 @@ Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
 [INFO] Extracting:
 
    Archive:        C:\Users\user\ffuf_2.1.0_windows_amd64.zip
-   Path:           C:\Users\user\ffuf
+   Asset:          C:\Users\user\ffuf
 
 [INFO] Deleting:
 
    Archive:        C:\Users\user\ffuf_2.1.0_windows_amd64.zip
 ```
 
-### 2. Get the release asset matching the pattern for a specific release tag:
+### 2. Get the asset matching the pattern for a specific release tag:
 ```
 Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip" -ReleaseTag "v2.0.0"
 ```
@@ -73,8 +73,8 @@ Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip" -ReleaseTa
    Asset:          ffuf_*_windows_amd64.zip
    ReleaseTag:     v2.0.0
    DownloadFolder: C:\Users\user
-   Extract:        True
    SevenZipPath:   C:\Program Files\7-Zip\7z.exe
+   ExtractArchive: True
    ExtractFolder:  C:\Users\user\ffuf
    DeleteArchive:  True
 
@@ -107,8 +107,8 @@ Get-GithubRelease -Repo "ffuf/ffuf" -List
    Asset:          *
    ReleaseTag:     latest
    DownloadFolder: C:\Users\user
-   Extract:        True
    SevenZipPath:   C:\Program Files\7-Zip\7z.exe
+   ExtractArchive: True
    ExtractFolder:  C:\Users\user\ffuf
    DeleteArchive:  True
 
