@@ -23,7 +23,10 @@ function Get-GithubRelease {
 
     .PARAMETER Repo
         (Mandatory) [String] The GitHub repository in the format "owner/repo".
-
+        
+    .PARAMETER List
+        (Optional) [Switch] When provided, lists all GitHub release tags and available assets, then exits.
+        
     .PARAMETER Asset
         (Optional) [String] The asset name or wildcard pattern to download.
 
@@ -41,9 +44,6 @@ function Get-GithubRelease {
 
     .PARAMETER ExtractFolder
         (Optional) [String] The folder where the asset will be extracted if it's an archive.
-
-    .PARAMETER List
-        (Optional) [Switch] When provided, lists all GitHub release tags and available assets, then exits.
 
     .PARAMETER DeleteArchive
         (Optional) [Bool] When true, deletes the downloaded archive file after extraction (if applicable).
@@ -93,8 +93,8 @@ function Get-GithubRelease {
 
     BEGIN {
         Write-Host "`n[INFO] Parameters:`n"
-        Write-Host "   List:           $List"
         Write-Host "   Repo:           $($Repo)"
+        Write-Host "   List:           $List"
         Write-Host "   Asset:          $Asset"
         Write-Host "   ReleaseTag:     $ReleaseTag"
         Write-Host "   DownloadFolder: $DownloadFolder"
