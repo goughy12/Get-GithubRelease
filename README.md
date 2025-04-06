@@ -92,47 +92,47 @@ Get-GithubRelease -Repo "ffuf/ffuf" -List
 
    -ReleaseTag "v2.1.0"
 
-   ffuf_2.1.0_checksums.txt
-   ffuf_2.1.0_checksums.txt.sig
-   ffuf_2.1.0_freebsd_386.tar.gz
-   ffuf_2.1.0_freebsd_amd64.tar.gz
-   ffuf_2.1.0_freebsd_armv6.tar.gz
-   ffuf_2.1.0_linux_386.tar.gz
-   ffuf_2.1.0_linux_amd64.tar.gz
-   ffuf_2.1.0_linux_arm64.tar.gz
-   ffuf_2.1.0_linux_armv6.tar.gz
-   ffuf_2.1.0_macOS_amd64.tar.gz
-   ffuf_2.1.0_macOS_arm64.tar.gz
-   ffuf_2.1.0_openbsd_386.tar.gz
-   ffuf_2.1.0_openbsd_amd64.tar.gz
-   ffuf_2.1.0_openbsd_arm64.tar.gz
-   ffuf_2.1.0_openbsd_armv6.tar.gz
-   ffuf_2.1.0_windows_386.zip
-   ffuf_2.1.0_windows_amd64.zip
-   ffuf_2.1.0_windows_arm64.zip
-   ffuf_2.1.0_windows_armv6.zip
+   -Asset "ffuf_2.1.0_checksums.txt"
+   -Asset "ffuf_2.1.0_checksums.txt.sig"
+   -Asset "ffuf_2.1.0_freebsd_386.tar.gz"
+   -Asset "ffuf_2.1.0_freebsd_amd64.tar.gz"
+   -Asset "ffuf_2.1.0_freebsd_armv6.tar.gz"
+   -Asset "ffuf_2.1.0_linux_386.tar.gz"
+   -Asset "ffuf_2.1.0_linux_amd64.tar.gz"
+   -Asset "ffuf_2.1.0_linux_arm64.tar.gz"
+   -Asset "ffuf_2.1.0_linux_armv6.tar.gz"
+   -Asset "ffuf_2.1.0_macOS_amd64.tar.gz"
+   -Asset "ffuf_2.1.0_macOS_arm64.tar.gz"
+   -Asset "ffuf_2.1.0_openbsd_386.tar.gz"
+   -Asset "ffuf_2.1.0_openbsd_amd64.tar.gz"
+   -Asset "ffuf_2.1.0_openbsd_arm64.tar.gz"
+   -Asset "ffuf_2.1.0_openbsd_armv6.tar.gz"
+   -Asset "ffuf_2.1.0_windows_386.zip"
+   -Asset "ffuf_2.1.0_windows_amd64.zip"
+   -Asset "ffuf_2.1.0_windows_arm64.zip"
+   -Asset "ffuf_2.1.0_windows_armv6.zip"
 
    -ReleaseTag "v2.0.0"
 
-   ffuf_2.0.0_checksums.txt
-   ffuf_2.0.0_checksums.txt.sig
-   ffuf_2.0.0_freebsd_386.tar.gz
-   ffuf_2.0.0_freebsd_amd64.tar.gz
-   ffuf_2.0.0_freebsd_armv6.tar.gz
-   ffuf_2.0.0_linux_386.tar.gz
-   ffuf_2.0.0_linux_amd64.tar.gz
-   ffuf_2.0.0_linux_arm64.tar.gz
-   ffuf_2.0.0_linux_armv6.tar.gz
-   ffuf_2.0.0_macOS_amd64.tar.gz
-   ffuf_2.0.0_macOS_arm64.tar.gz
-   ffuf_2.0.0_openbsd_386.tar.gz
-   ffuf_2.0.0_openbsd_amd64.tar.gz
-   ffuf_2.0.0_openbsd_arm64.tar.gz
-   ffuf_2.0.0_openbsd_armv6.tar.gz
-   ffuf_2.0.0_windows_386.zip
-   ffuf_2.0.0_windows_amd64.zip
-   ffuf_2.0.0_windows_arm64.zip
-   ffuf_2.0.0_windows_armv6.zip
+   -Asset "ffuf_2.0.0_checksums.txt"
+   -Asset "ffuf_2.0.0_checksums.txt.sig"
+   -Asset "ffuf_2.0.0_freebsd_386.tar.gz"
+   -Asset "ffuf_2.0.0_freebsd_amd64.tar.gz"
+   -Asset "ffuf_2.0.0_freebsd_armv6.tar.gz"
+   -Asset "ffuf_2.0.0_linux_386.tar.gz"
+   -Asset "ffuf_2.0.0_linux_amd64.tar.gz"
+   -Asset "ffuf_2.0.0_linux_arm64.tar.gz"
+   -Asset "ffuf_2.0.0_linux_armv6.tar.gz"
+   -Asset "ffuf_2.0.0_macOS_amd64.tar.gz"
+   -Asset "ffuf_2.0.0_macOS_arm64.tar.gz"
+   -Asset "ffuf_2.0.0_openbsd_386.tar.gz"
+   -Asset "ffuf_2.0.0_openbsd_amd64.tar.gz"
+   -Asset "ffuf_2.0.0_openbsd_arm64.tar.gz"
+   -Asset "ffuf_2.0.0_openbsd_armv6.tar.gz"
+   -Asset "ffuf_2.0.0_windows_386.zip"
+   -Asset "ffuf_2.0.0_windows_amd64.zip"
+   -Asset "ffuf_2.0.0_windows_arm64.zip"
+   -Asset "ffuf_2.0.0_windows_armv6.zip"
 
    ......
 ```
