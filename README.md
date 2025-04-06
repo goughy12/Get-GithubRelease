@@ -19,7 +19,7 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 
 -SevenZipPath <string>      The path to the 7-Zip executable. (Default: "C:\Program Files\7-Zip\7z.exe")
 
--ExtractFolder <string>     The folder where the asset will be extracted if it's an archive. (Default: "$DownloadFolder\<repo-name>")
+-ExtractFolder <string>     The folder where the asset will be extracted if it's an archive. (Default: "DownloadFolder\<repo-name>")
 
 -DeleteArchive <bool>       When true, deletes the downloaded archive file after extraction (if applicable). (Default: True)
 ```
