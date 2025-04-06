@@ -6,31 +6,38 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 
 ```
 -Repo <string>
-(Mandatory) The GitHub repository in the format "owner/repo".
+The GitHub repository in the format "owner/repo".
 
 -List
-(Optional) When provided, lists all GitHub release tags and available assets, then exits.
+When provided, lists all GitHub release tags and available assets, then exits.
   
--Asset <string> (Default: "*" )
-(Optional) The asset name or wildcard pattern to download.
+-Asset <string>
+Default: "*"
+The asset name or wildcard pattern to download.
 
--ReleaseTag <string> (Default: "latest"))
-(Optional) The release tag to use. If "latest" is specified, the latest release is retrieved.
+-ReleaseTag <string>
+Default: "latest"
+The release tag to use. If "latest" is specified, the latest release is retrieved.
 
--DownloadFolder <string> (Default: current directory)  
-(Optional) The folder where the downloaded asset will be saved.
+-DownloadFolder <string>
+Default: current directory
+The folder where the downloaded asset will be saved.
 
--Extract <bool> (Default: True)
-(Optional) Indicates whether to extract the release asset if it is an archive.
+-Extract <bool>
+Default: True
+Indicates whether to extract the release asset if it is an archive.
 
--SevenZipPath <string> (Default: "C:\Program Files\7-Zip\7z.exe")
-(Optional) The path to the 7-Zip executable.
+-SevenZipPath <string>
+Default: "C:\Program Files\7-Zip\7z.exe"
+The path to the 7-Zip executable.
 
--ExtractFolder <string> (Default: "$DownloadFolder\<repo-name>") 
-(Optional) The folder where the asset will be extracted if it's an archive.
+-ExtractFolder <string>
+Default: "$DownloadFolder\<repo-name>"
+The folder where the asset will be extracted if it's an archive.
 
--DeleteArchive <bool> (Default: True) 
-(Optional) When true, deletes the downloaded archive file after extraction (if applicable).
+-DeleteArchive <bool>
+Default: True
+When true, deletes the downloaded archive file after extraction (if applicable).
 ```
 
 ## Examples
