@@ -88,7 +88,7 @@ function Get-GithubRelease {
     )
 
     BEGIN {
-        Write-Host "`n[INFO] Parameters:`n"
+        Write-Host "`nParameters:`n"
         Write-Host "   Repo:           $($Repo)"
         Write-Host "   List:           $List"
         Write-Host "   Asset:          $Asset"
@@ -110,11 +110,11 @@ function Get-GithubRelease {
                 $releases = Invoke-RestMethod -Uri $releasesUrl -ErrorAction Stop
             }
             catch {
-                Write-Host "[ERROR] Failed to retrieve releases: $_"
+                Write-Host "Failed to retrieve releases: $_"
                 return
             }
 
-            Write-Host "[INFO] Release Assets:`n"
+            Write-Host "Release Assets:`n"
             foreach ($release in $releases) {
                 Write-Host "   -ReleaseTag `"$($release.tag_name)`"`n"
                 foreach ($item in $release.assets) {
@@ -142,7 +142,7 @@ function Get-GithubRelease {
             $release = Invoke-RestMethod -Uri $releaseUrl -ErrorAction Stop
         }
         catch {
-            Write-Host "[ERROR] Failed to retrieve release info: $_"
+            Write-Host "Failed to retrieve release info: $_"
             return
         }
 
@@ -153,10 +153,10 @@ function Get-GithubRelease {
 
         if ($releaseAsset.Count -ne 1) {
             if ($releaseAsset.Count -eq 0) {
-                Write-Host "[ERROR] No asset found matching '$Asset':`n"           
+                Write-Host "No asset found matching '$Asset':`n"           
             }
             else {
-                Write-Host "[ERROR] Multiple assets found matching '$Asset':`n" 
+                Write-Host "Multiple assets found matching '$Asset':`n" 
             }
             Write-Host "   Repo:           $($Repo)"
             Write-Host "   ReleaseTag:     $($release.tag_name)`n"
@@ -175,7 +175,7 @@ function Get-GithubRelease {
         $filename    = $releaseAsset.name
         $localFile   = Join-Path -Path $DownloadFolder -ChildPath $filename
 
-        Write-Host "[INFO] Downloading:`n"
+        Write-Host "Downloading:`n"
         Write-Host "   Repo:           $($Repo)"
         Write-Host "   ReleaseTag:     $($release.tag_name)"
         Write-Host "   Filename:       $filename"
@@ -187,7 +187,7 @@ function Get-GithubRelease {
             Invoke-WebRequest -Uri $downloadUrl -OutFile $localFile -ErrorAction Stop
         }
         catch {
-            Write-Host "[ERROR] Download failed: $_"
+            Write-Host "Download failed: $_"
             return
         }
 
@@ -196,17 +196,17 @@ function Get-GithubRelease {
         # -------------------------------
         if ($Extract -and $filename.ToLower() -match "\.(zip|7z|gz|rar|xz|bz2)$") {
             if (-not (Test-Path $SevenZipPath)) {
-                Write-Host "[ERROR] 7-Zip is not installed.`n`n   Install 7-Zip:  winget install 7zip`n"
+                Write-Host "7-Zip is not installed.`n`n   Install 7-Zip:  winget install 7zip`n"
                 return
             }
             try {
-                Write-Host "[INFO] Extracting:`n"
+                Write-Host "Extracting:`n"
                 Write-Host "   Archive:        $localFile"
                 Write-Host "   Path:           $ExtractFolder`n"
                 & $SevenZipPath e $localFile -o"$ExtractFolder" -y > $null 2>&1
             }
             catch {
-                Write-Host "[ERROR] Extract failed: $_"
+                Write-Host "Extract failed: $_"
                 return
             }
         }
@@ -219,12 +219,12 @@ function Get-GithubRelease {
         # -------------------------------
         if ($DeleteArchive) {
             try {
-                Write-Host "[INFO] Deleting:`n`n" `
+                Write-Host "Deleting:`n`n" `
                 "  Archive:        $localFile`n"
                 Remove-Item -Path $localFile -Force
             }
             catch {
-                Write-Host "[ERROR] Failed to delete archive: $_"
+                Write-Host "Failed to delete archive: $_"
             }
         }
     }
