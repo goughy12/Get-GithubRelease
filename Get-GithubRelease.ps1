@@ -122,7 +122,7 @@ function Get-GithubRelease {
             foreach ($release in $releases) {
                 Write-Host "   -ReleaseTag `"$($release.tag_name)`"`n"
                 foreach ($item in $release.assets) {
-                    Write-Host "   $($item.name)"
+                    Write-Host "   -Asset `"$($item.name)`""
                 }
                 Write-Host ""
             }
