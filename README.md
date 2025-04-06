@@ -34,9 +34,9 @@ Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
 [INFO] Parameters:
 
    Repo:           ffuf/ffuf
-   ReleaseTag:     latest
-   Asset:          ffuf_*_windows_amd64.zip
    List:           False
+   Asset:          ffuf_*_windows_amd64.zip
+   ReleaseTag:     latest
    DownloadFolder: C:\Users\user
    Extract:        True
    SevenZipPath:   C:\Program Files\7-Zip\7z.exe
@@ -69,9 +69,9 @@ Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip" -ReleaseTa
 [INFO] Parameters:
 
    Repo:           ffuf/ffuf
-   ReleaseTag:     v2.0.0
-   Asset:          ffuf_*_windows_amd64.zip
    List:           False
+   Asset:          ffuf_*_windows_amd64.zip
+   ReleaseTag:     v2.0.0
    DownloadFolder: C:\Users\user
    Extract:        True
    SevenZipPath:   C:\Program Files\7-Zip\7z.exe
@@ -103,9 +103,9 @@ Get-GithubRelease -Repo "ffuf/ffuf" -List
 [INFO] Parameters:
 
    Repo:           ffuf/ffuf
-   ReleaseTag:     latest
-   Asset:          *
    List:           True
+   Asset:          *
+   ReleaseTag:     latest
    DownloadFolder: C:\Users\user
    Extract:        True
    SevenZipPath:   C:\Program Files\7-Zip\7z.exe
