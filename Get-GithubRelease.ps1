@@ -168,6 +168,7 @@ function Get-GithubRelease {
             foreach ($item in $release.assets) {
                 Write-Host "   -Asset `"$($item.name)`""
             }
+            Write-Host ""
             return
         }
 
