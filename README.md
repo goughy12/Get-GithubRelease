@@ -5,23 +5,23 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 ## Parameters
 
 ```
--Repo <string>              The GitHub repository in the format "owner/repo".
+-Repo <string>              The GitHub repository in the format "<repo-owner>/<repo-name>".
 
--List                       Lists all GitHub release tags and available assets.
+-List                       Retrieves a list of all release tags and assets then exits.
 
 -Asset <string>             The asset name or wildcard pattern to download. (Default: "*")
 
--ReleaseTag <string>        The release tag to use. If "latest" is specified, the latest release is retrieved. (Default: "latest")
+-ReleaseTag <string>        The release tag to use. (Default: "latest")
 
--DownloadFolder <string>    The folder where the downloaded asset will be saved. (Default: current directory)
+-DownloadFolder <string>    The folder where the asset will be saved. (Default: "<current-directory>")
 
--Extract <bool>             When true, extract the release asset (if applicable). (Default: True)
+-Extract <bool>             When true, extract the asset if it's an archive. (Default: True)
 
 -SevenZipPath <string>      The path to the 7-Zip executable. (Default: "C:\Program Files\7-Zip\7z.exe")
 
--ExtractFolder <string>     The folder where the asset will be extracted if it's an archive. (Default: "<current-directory>\<repo-name>")
+-ExtractFolder <string>     The folder where the asset will be extracted. (Default: "<current-directory>\<repo-name>")
 
--DeleteArchive <bool>       When true, deletes the downloaded archive file after extraction (if applicable). (Default: True)
+-DeleteArchive <bool>       When true, deletes the asset after extraction. (Default: True)
 ```
 
 ## Usage
