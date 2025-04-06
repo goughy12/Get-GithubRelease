@@ -2,7 +2,74 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 
 Examples:
 
-1. List all releases and available assets:
+1. Download the latest release asset matching a pattern:
+```
+Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
+
+[INFO] Parameters:
+
+   Repo:           ffuf/ffuf
+   ReleaseTag:     latest
+   Asset:          ffuf_*_windows_amd64.zip
+   List:           False
+   DownloadFolder: C:\Users\user
+   Extract:        True
+   SevenZipPath:   C:\Program Files\7-Zip\7z.exe
+   ExtractFolder:  C:\Users\user\ffuf
+   DeleteArchive:  True
+
+[INFO] Downloading:
+
+   Repo:           ffuf/ffuf
+   ReleaseTag:     v2.1.0
+   Filename:       ffuf_2.1.0_windows_amd64.zip
+   URL:            https://github.com/ffuf/ffuf/releases/download/v2.1.0/ffuf_2.1.0_windows_amd64.zip
+   Path:           C:\Users\user\ffuf_2.1.0_windows_amd64.zip
+
+[INFO] Extracting:
+
+   Archive:        C:\Users\user\ffuf_2.1.0_windows_amd64.zip
+   Path:           C:\Users\user\ffuf
+
+[INFO] Deleting:
+
+   Archive:        C:\Users\user\ffuf_2.1.0_windows_amd64.zip
+```
+
+2. Download a specific release asset:
+```
+Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip" -ReleaseTag "v2.0.0"
+
+[INFO] Parameters:
+
+   Repo:           ffuf/ffuf
+   ReleaseTag:     v2.0.0
+   Asset:          ffuf_*_windows_amd64.zip
+   List:           False
+   DownloadFolder: C:\Users\user
+   Extract:        True
+   SevenZipPath:   C:\Program Files\7-Zip\7z.exe
+   ExtractFolder:  C:\Users\user\ffuf
+   DeleteArchive:  True
+
+[INFO] Downloading:
+
+   Repo:           ffuf/ffuf
+   ReleaseTag:     v2.0.0
+   Filename:       ffuf_2.0.0_windows_amd64.zip
+   URL:            https://github.com/ffuf/ffuf/releases/download/v2.0.0/ffuf_2.0.0_windows_amd64.zip
+   Path:           C:\Users\user\ffuf_2.0.0_windows_amd64.zip
+
+[INFO] Extracting:
+
+   Archive:        C:\Users\user\ffuf_2.0.0_windows_amd64.zip
+   Path:           C:\Users\user\ffuf
+
+[INFO] Deleting:
+
+   Archive:        C:\Users\user\ffuf_2.0.0_windows_amd64.zip
+```
+3. List all releases and available assets:
 ```
 Get-GithubRelease -Repo "ffuf/ffuf" -List
 
@@ -63,72 +130,4 @@ Get-GithubRelease -Repo "ffuf/ffuf" -List
    ffuf_2.0.0_windows_amd64.zip
    ffuf_2.0.0_windows_arm64.zip
    ffuf_2.0.0_windows_armv6.zip
-```
-
-2. Download the latest release asset matching a pattern:
-```
-Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
-
-[INFO] Parameters:
-
-   Repo:           ffuf/ffuf
-   ReleaseTag:     latest
-   Asset:          ffuf_*_windows_amd64.zip
-   List:           False
-   DownloadFolder: C:\Users\user
-   Extract:        True
-   SevenZipPath:   C:\Program Files\7-Zip\7z.exe
-   ExtractFolder:  C:\Users\user\ffuf
-   DeleteArchive:  True
-
-[INFO] Downloading:
-
-   Repo:           ffuf/ffuf
-   ReleaseTag:     v2.1.0
-   Filename:       ffuf_2.1.0_windows_amd64.zip
-   URL:            https://github.com/ffuf/ffuf/releases/download/v2.1.0/ffuf_2.1.0_windows_amd64.zip
-   Path:           C:\Users\user\ffuf_2.1.0_windows_amd64.zip
-
-[INFO] Extracting:
-
-   Archive:        C:\Users\user\ffuf_2.1.0_windows_amd64.zip
-   Path:           C:\Users\user\ffuf
-
-[INFO] Deleting:
-
-   Archive:        C:\Users\user\ffuf_2.1.0_windows_amd64.zip
-```
-
-3. Download a specific release asset:
-```
-Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip" -ReleaseTag "v2.0.0"
-
-[INFO] Parameters:
-
-   Repo:           ffuf/ffuf
-   ReleaseTag:     v2.0.0
-   Asset:          ffuf_*_windows_amd64.zip
-   List:           False
-   DownloadFolder: C:\Users\user
-   Extract:        True
-   SevenZipPath:   C:\Program Files\7-Zip\7z.exe
-   ExtractFolder:  C:\Users\user\ffuf
-   DeleteArchive:  True
-
-[INFO] Downloading:
-
-   Repo:           ffuf/ffuf
-   ReleaseTag:     v2.0.0
-   Filename:       ffuf_2.0.0_windows_amd64.zip
-   URL:            https://github.com/ffuf/ffuf/releases/download/v2.0.0/ffuf_2.0.0_windows_amd64.zip
-   Path:           C:\Users\user\ffuf_2.0.0_windows_amd64.zip
-
-[INFO] Extracting:
-
-   Archive:        C:\Users\user\ffuf_2.0.0_windows_amd64.zip
-   Path:           C:\Users\user\ffuf
-
-[INFO] Deleting:
-
-   Archive:        C:\Users\user\ffuf_2.0.0_windows_amd64.zip
 ```
