@@ -110,7 +110,7 @@ function Get-GithubRelease {
                 $releases = Invoke-RestMethod -Uri $releasesUrl -ErrorAction Stop
             }
             catch {
-                Write-Host "[ERROR] Failed to retrieve releases for $($Repo): $_"
+                Write-Host "[ERROR] Failed to retrieve releases: $_"
                 return
             }
 
@@ -142,7 +142,7 @@ function Get-GithubRelease {
             $release = Invoke-RestMethod -Uri $releaseUrl -ErrorAction Stop
         }
         catch {
-            Write-Host "[ERROR] Failed to retrieve release info for $($Repo): $_"
+            Write-Host "[ERROR] Failed to retrieve release info: $_"
             return
         }
 
