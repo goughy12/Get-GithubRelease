@@ -26,7 +26,7 @@ This PowerShell function retrieves GitHub release information, downloads a speci
 
 ## Usage
 
-### 1. Get the latest release asset matching the wildcard pattern:
+### 1. Get the latest release asset matching the pattern:
 ```
 Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
 ```
@@ -61,7 +61,7 @@ Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip"
    Archive:        C:\Users\user\ffuf_2.1.0_windows_amd64.zip
 ```
 
-### 2. Get the release asset matching the wildcard pattern for a specific release tag:
+### 2. Get the release asset matching the pattern for a specific release tag:
 ```
 Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*_windows_amd64.zip" -ReleaseTag "v2.0.0"
 ```
