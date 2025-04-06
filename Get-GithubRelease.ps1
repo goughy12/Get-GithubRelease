@@ -89,15 +89,15 @@ function Get-GithubRelease {
 
     BEGIN {
         Write-Host "`nParameters:`n"
-        Write-Host "   Repo:           $($Repo)"
-        Write-Host "   List:           $List"
-        Write-Host "   Asset:          $Asset"
-        Write-Host "   ReleaseTag:     $ReleaseTag"
-        Write-Host "   DownloadFolder: $DownloadFolder"
-        Write-Host "   Extract:        $Extract"
-        Write-Host "   SevenZipPath:   $SevenZipPath"
-        Write-Host "   ExtractFolder:  $ExtractFolder"
-        Write-Host "   DeleteArchive:  $DeleteArchive`n"
+        Write-Host "Repo:           $($Repo)"
+        Write-Host "List:           $List"
+        Write-Host "Asset:          $Asset"
+        Write-Host "ReleaseTag:     $ReleaseTag"
+        Write-Host "DownloadFolder: $DownloadFolder"
+        Write-Host "Extract:        $Extract"
+        Write-Host "SevenZipPath:   $SevenZipPath"
+        Write-Host "ExtractFolder:  $ExtractFolder"
+        Write-Host "DeleteArchive:  $DeleteArchive`n"
     }
 
     PROCESS {
@@ -116,9 +116,9 @@ function Get-GithubRelease {
 
             Write-Host "Release Assets:`n"
             foreach ($release in $releases) {
-                Write-Host "   -ReleaseTag `"$($release.tag_name)`"`n"
+                Write-Host "-ReleaseTag `"$($release.tag_name)`"`n"
                 foreach ($item in $release.assets) {
-                    Write-Host "   -Asset `"$($item.name)`""
+                    Write-Host "-Asset `"$($item.name)`""
                 }
                 Write-Host ""
             }
@@ -158,11 +158,11 @@ function Get-GithubRelease {
             else {
                 Write-Host "Multiple assets found matching '$Asset':`n" 
             }
-            Write-Host "   Repo:           $($Repo)"
-            Write-Host "   ReleaseTag:     $($release.tag_name)`n"
-            Write-Host "   Available assets:`n"
+            Write-Host "Repo:           $($Repo)"
+            Write-Host "ReleaseTag:     $($release.tag_name)`n"
+            Write-Host "Available assets:`n"
             foreach ($item in $release.assets) {
-                Write-Host "   -Asset `"$($item.name)`""
+                Write-Host "-Asset `"$($item.name)`""
             }
             Write-Host ""
             return
@@ -176,11 +176,11 @@ function Get-GithubRelease {
         $localFile   = Join-Path -Path $DownloadFolder -ChildPath $filename
 
         Write-Host "Downloading:`n"
-        Write-Host "   Repo:           $($Repo)"
-        Write-Host "   ReleaseTag:     $($release.tag_name)"
-        Write-Host "   Filename:       $filename"
-        Write-Host "   URL:            $downloadUrl"
-        Write-Host "   Path:           $localFile`n"
+        Write-Host "Repo:           $($Repo)"
+        Write-Host "ReleaseTag:     $($release.tag_name)"
+        Write-Host "Filename:       $filename"
+        Write-Host "URL:            $downloadUrl"
+        Write-Host "Path:           $localFile`n"
 
         try {
             $ProgressPreference = 'SilentlyContinue'
@@ -201,8 +201,8 @@ function Get-GithubRelease {
             }
             try {
                 Write-Host "Extracting:`n"
-                Write-Host "   Archive:        $localFile"
-                Write-Host "   Path:           $ExtractFolder`n"
+                Write-Host "Archive:        $localFile"
+                Write-Host "Path:           $ExtractFolder`n"
                 & $SevenZipPath e $localFile -o"$ExtractFolder" -y > $null 2>&1
             }
             catch {
@@ -220,7 +220,7 @@ function Get-GithubRelease {
         if ($DeleteArchive) {
             try {
                 Write-Host "Deleting:`n`n" `
-                "  Archive:        $localFile`n"
+                "Archive:        $localFile`n"
                 Remove-Item -Path $localFile -Force
             }
             catch {
