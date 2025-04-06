@@ -26,17 +26,17 @@ function Get-GithubRelease {
     .PARAMETER Asset
         (Optional) [String] The asset name or wildcard pattern to download.
 
-    .PARAMETER ReleaseTag
+    .PARAMETER Tag
         (Optional) [String] The release tag to use. If "latest" is specified, the latest release is retrieved.
 
     .PARAMETER DownloadFolder
         (Optional) [String] The folder where the downloaded asset will be saved. Defaults to the current directory.
-
-    .PARAMETER Extract
-        (Optional) [Bool] Indicates whether to extract the release asset if it is an archive.
-
+        
     .PARAMETER SevenZipPath
         (Optional) [String] The path to the 7-Zip executable.
+        
+    .PARAMETER ExtractArchive
+        (Optional) [Bool] Indicates whether to extract the release asset if it is an archive.
 
     .PARAMETER ExtractFolder
         (Optional) [String] The folder where the asset will be extracted if it's an archive.
@@ -45,7 +45,7 @@ function Get-GithubRelease {
         (Optional) [Bool] When true, deletes the downloaded archive file after extraction (if applicable).
 
     .EXAMPLE
-        # List all release tags and available assets 
+        # List all release tags and assets 
         Get-GithubRelease -Repo "ffuf/ffuf" -List
 
     .EXAMPLE
@@ -54,7 +54,7 @@ function Get-GithubRelease {
 
     .EXAMPLE
         # Get the release asset matching the wildcard pattern for a specific release tag
-        Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*windows_amd64.zip" -ReleaseTag "v2.1.0"
+        Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*windows_amd64.zip" -Tag "v2.1.0"
     #>
 
     [CmdletBinding()]
@@ -69,16 +69,16 @@ function Get-GithubRelease {
         [string]$Asset = "*",
 
         [Parameter()]
-        [string]$ReleaseTag = "latest",
+        [string]$Tag = "latest",
 
         [Parameter()]
         [string]$DownloadFolder = $PWD,
 
         [Parameter()]
-        [bool]$Extract = $true,
-
-        [Parameter()]
         [string]$SevenZipPath = "C:\Program Files\7-Zip\7z.exe",
+        
+        [Parameter()]
+        [bool]$ExtractArchive = $true,
 
         [Parameter()]
         [string]$ExtractFolder = "$DownloadFolder\$($Repo.Split('/')[-1])",
@@ -88,16 +88,19 @@ function Get-GithubRelease {
     )
 
     BEGIN {
-        Write-Host "`nParameters:`n"
-        Write-Host "Repo:           $($Repo)"
-        Write-Host "List:           $List"
-        Write-Host "Asset:          $Asset"
-        Write-Host "ReleaseTag:     $ReleaseTag"
-        Write-Host "DownloadFolder: $DownloadFolder"
-        Write-Host "Extract:        $Extract"
-        Write-Host "SevenZipPath:   $SevenZipPath"
-        Write-Host "ExtractFolder:  $ExtractFolder"
-        Write-Host "DeleteArchive:  $DeleteArchive`n"
+        Write-Host ""
+        Write-Host "Get-GithubRelease Parameters:"
+        Write-Host ""
+        Write-Host "    Repo:           $($Repo)"
+        Write-Host "    List:           $List"
+        Write-Host "    Asset:          $Asset"
+        Write-Host "    Tag:            $Tag"
+        Write-Host "    DownloadFolder: $DownloadFolder"
+        Write-Host "    SevenZipPath:   $SevenZipPath"
+        Write-Host "    ExtractArchive: $ExtractArchive"
+        Write-Host "    ExtractFolder:  $ExtractFolder"
+        Write-Host "    DeleteArchive:  $DeleteArchive"
+        Write-Host ""
     }
 
     PROCESS {
@@ -114,9 +117,11 @@ function Get-GithubRelease {
                 return
             }
 
-            Write-Host "Release Assets:`n"
+            Write-Host "    Release Assets:"
+            Write-Host ""
             foreach ($release in $releases) {
-                Write-Host "-ReleaseTag `"$($release.tag_name)`"`n"
+                Write-Host "-Tag `"$($release.tag_name)`""
+                Write-Host ""
                 foreach ($item in $release.assets) {
                     Write-Host "-Asset `"$($item.name)`""
                 }
@@ -128,8 +133,8 @@ function Get-GithubRelease {
         # -------------------------------
         # DETERMINE RELEASE URL
         # -------------------------------
-        if (-not [string]::IsNullOrWhiteSpace($ReleaseTag) -and $ReleaseTag -ne "latest") {
-            $releaseUrl = "https://api.github.com/repos/$Repo/releases/tags/$ReleaseTag"
+        if (-not [string]::IsNullOrWhiteSpace($Tag) -and $Tag -ne "latest") {
+            $releaseUrl = "https://api.github.com/repos/$Repo/releases/tags/$Tag"
         }
         else {
             $releaseUrl = "https://api.github.com/repos/$Repo/releases/latest"
@@ -158,11 +163,11 @@ function Get-GithubRelease {
             else {
                 Write-Host "Multiple assets found matching '$Asset':`n" 
             }
-            Write-Host "Repo:           $($Repo)"
-            Write-Host "ReleaseTag:     $($release.tag_name)`n"
-            Write-Host "Available assets:`n"
+            Write-Host "    Repo:           $($Repo)"
+            Write-Host "    Tag:     $($release.tag_name)`n"
+            Write-Host "    Available assets:`n"
             foreach ($item in $release.assets) {
-                Write-Host "-Asset `"$($item.name)`""
+                Write-Host "    -Asset `"$($item.name)`""
             }
             Write-Host ""
             return
@@ -175,12 +180,12 @@ function Get-GithubRelease {
         $filename    = $releaseAsset.name
         $localFile   = Join-Path -Path $DownloadFolder -ChildPath $filename
 
-        Write-Host "Downloading:`n"
-        Write-Host "Repo:           $($Repo)"
-        Write-Host "ReleaseTag:     $($release.tag_name)"
-        Write-Host "Filename:       $filename"
-        Write-Host "URL:            $downloadUrl"
-        Write-Host "Path:           $localFile`n"
+        Write-Host "Downloading asset:`n"
+        Write-Host "    Repo:           $($Repo)"
+        Write-Host "    Tag:     $($release.tag_name)"
+        Write-Host "    Filename:       $filename"
+        Write-Host "    URL:            $downloadUrl"
+        Write-Host "    Path:           $localFile`n"
 
         try {
             $ProgressPreference = 'SilentlyContinue'
@@ -194,19 +199,21 @@ function Get-GithubRelease {
         # -------------------------------
         # EXTRACT ASSET IF REQUIRED
         # -------------------------------
-        if ($Extract -and $filename.ToLower() -match "\.(zip|7z|gz|rar|xz|bz2)$") {
+        if ($ExtractArchive -and $filename.ToLower() -match "\.(zip|7z|gz|rar|xz|bz2)$") {
             if (-not (Test-Path $SevenZipPath)) {
                 Write-Host "7-Zip is not installed.`n`n   Install 7-Zip:  winget install 7zip`n"
                 return
             }
             try {
-                Write-Host "Extracting:`n"
-                Write-Host "Archive:        $localFile"
-                Write-Host "Path:           $ExtractFolder`n"
+                Write-Host "Extracting archive:"
+                Write-Host ""
+                Write-Host "    Archive:        $localFile"
+                Write-Host "    Path:           $ExtractFolder"
+                Write-Host ""
                 & $SevenZipPath e $localFile -o"$ExtractFolder" -y > $null 2>&1
             }
             catch {
-                Write-Host "Extract failed: $_"
+                Write-Host "Extracting failed: $_"
                 return
             }
         }
@@ -219,8 +226,11 @@ function Get-GithubRelease {
         # -------------------------------
         if ($DeleteArchive) {
             try {
-                Write-Host "Deleting:`n`n" `
-                "Archive:        $localFile`n"
+                Write-Host "Deleting archive:"
+                Write-Host ""
+                Write-Host "Archive:        $localFile`n"
+                Write-Host ""
+                
                 Remove-Item -Path $localFile -Force
             }
             catch {
