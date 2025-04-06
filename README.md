@@ -90,7 +90,7 @@ Get-GithubRelease -Repo "ffuf/ffuf" -List
 
 [INFO] Release Assets:
 
-   ReleaseTag: v2.1.0
+   -ReleaseTag "v2.1.0"
 
    ffuf_2.1.0_checksums.txt
    ffuf_2.1.0_checksums.txt.sig
@@ -112,7 +112,7 @@ Get-GithubRelease -Repo "ffuf/ffuf" -List
    ffuf_2.1.0_windows_arm64.zip
    ffuf_2.1.0_windows_armv6.zip
 
-   ReleaseTag: v2.0.0
+   -ReleaseTag "v2.0.0"
 
    ffuf_2.0.0_checksums.txt
    ffuf_2.0.0_checksums.txt.sig
@@ -133,4 +133,6 @@ Get-GithubRelease -Repo "ffuf/ffuf" -List
    ffuf_2.0.0_windows_amd64.zip
    ffuf_2.0.0_windows_arm64.zip
    ffuf_2.0.0_windows_armv6.zip
+
+   ......
 ```
