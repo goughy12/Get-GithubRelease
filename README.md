@@ -2,7 +2,7 @@
 
 This PowerShell function retrieves GitHub release information, downloads a specified asset, and optionally extracts it. It also lets you list all release tags and available assets.
 
-Examples:
+## Examples
 
 1. Get the latest release asset matching the wildcard pattern:
 ```
