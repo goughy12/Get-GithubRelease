@@ -93,10 +93,10 @@ function Get-GithubRelease {
 
     BEGIN {
         Write-Host "`n[INFO] Parameters:`n"
-        Write-Host "   Repo:           $($Repo)"
-        Write-Host "   ReleaseTag:     $ReleaseTag"
-        Write-Host "   Asset:          $Asset"
         Write-Host "   List:           $List"
+        Write-Host "   Repo:           $($Repo)"
+        Write-Host "   Asset:          $Asset"
+        Write-Host "   ReleaseTag:     $ReleaseTag"
         Write-Host "   DownloadFolder: $DownloadFolder"
         Write-Host "   Extract:        $Extract"
         Write-Host "   SevenZipPath:   $SevenZipPath"
