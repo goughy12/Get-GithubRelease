@@ -5,61 +5,61 @@ function Get-GithubRelease {
 
     .DESCRIPTION
         The Get-GithubRelease function interacts with the GitHub API to retrieve release information for a specified repository.
-        It supports fetching either the latest release or a specific release by tag. The function downloads a release asset that 
-        matches a provided wildcard pattern. If the -List switch is specified, it will list all release tags and available assets 
+        It supports fetching either the latest release or a specific release by tag. The function downloads a release asset that
+        matches a provided wildcard pattern. If the -List switch is specified, it will list all release tags and available assets
         for the repository, allowing users to determine which asset they may want to download.
 
-        Additionally, if the downloaded asset is an archive (supported formats include .zip, .7z, .gz, .rar, .xz, and .bz2), 
-        the function can automatically extract its contents using 7-Zip into a designated extraction folder. After extraction, 
-        if the -DeleteArchive switch is enabled, the downloaded archive will be deleted. Users can customize both the download 
+        Additionally, if the downloaded asset is an archive (supported formats include .zip, .7z, .gz, .rar, .xz, and .bz2),
+        the function can automatically extract its contents using 7-Zip into a designated extraction folder. After extraction,
+        if the -DeleteArchive switch is enabled, the downloaded archive will be deleted. Users can customize both the download
         and extraction folders via parameters.
 
-        This function is useful for automating the process of obtaining and processing release assets from GitHub repositories, 
+        This function is useful for automating the process of obtaining and processing release assets from GitHub repositories,
         especially in deployment or build integration scenarios.
 
     .PARAMETER Repo
-        (Mandatory) [String] The GitHub repository in the format "owner/repo".
-        
+        [String] The GitHub repository in the format "<repo-owner>/<repo-name>".
+
     .PARAMETER List
-        (Optional) [Switch] When provided, lists all GitHub release tags and available assets, then exits.
-        
+        [Switch] Retrieves a list of all release tags and assets then exits.
+
     .PARAMETER Asset
-        (Optional) [String] The asset name or wildcard pattern to download.
+        [String] The asset name or wildcard pattern to download. (Default: "*")
 
     .PARAMETER Tag
-        (Optional) [String] The release tag to use. If "latest" is specified, the latest release is retrieved.
+        [String] The release tag to use. (Default: "latest")
 
     .PARAMETER DownloadFolder
-        (Optional) [String] The folder where the downloaded asset will be saved. Defaults to the current directory.
-        
+        [String] The folder where the asset will be saved. (Default: "<current-directory>")
+
     .PARAMETER SevenZipPath
-        (Optional) [String] The path to the 7-Zip executable.
-        
+        [String] The path to the 7-Zip executable. (Default: "C:\Program Files\7-Zip\7z.exe")
+
     .PARAMETER ExtractArchive
-        (Optional) [Bool] Indicates whether to extract the release asset if it is an archive.
+        [Bool] When true, extract the asset if it's an archive. (Default: True)
 
     .PARAMETER ExtractFolder
-        (Optional) [String] The folder where the asset will be extracted if it's an archive.
+        [String] The folder where the asset will be extracted. (Default: "DownloadFolder\<repo-name>")
 
     .PARAMETER DeleteArchive
-        (Optional) [Bool] When true, deletes the downloaded archive file after extraction (if applicable).
+        [Bool] When true, deletes the asset after extraction. (Default: True)
 
     .EXAMPLE
-        # List all release tags and assets 
+        # List all release tags and available assets
         Get-GithubRelease -Repo "ffuf/ffuf" -List
 
     .EXAMPLE
-        # Get the latest release asset matching the wildcard pattern
+        # Get the latest asset matching the pattern
         Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*windows_amd64.zip"
 
     .EXAMPLE
-        # Get the release asset matching the wildcard pattern for a specific release tag
+        # Get the asset matching the pattern for a specific release
         Get-GithubRelease -Repo "ffuf/ffuf" -Asset "ffuf_*windows_amd64.zip" -Tag "v2.1.0"
     #>
 
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true)]
+        [Parameter()]
         [string]$Repo,
 
         [Parameter()]
@@ -76,7 +76,7 @@ function Get-GithubRelease {
 
         [Parameter()]
         [string]$SevenZipPath = "C:\Program Files\7-Zip\7z.exe",
-        
+
         [Parameter()]
         [bool]$ExtractArchive = $true,
 
@@ -88,9 +88,15 @@ function Get-GithubRelease {
     )
 
     BEGIN {
-        Write-Host ""
-        Write-Host "Get-GithubRelease Parameters:"
-        Write-Host ""
+        if (-not $Repo) {
+            Write-Host "`nExamples:`n`n"
+            Write-Host "    # List all release tags and assets:`n    Get-GithubRelease -Repo `"ffuf/ffuf`" -List`n`n"
+            Write-Host "    # Get the latest asset matching the pattern:`n    Get-GithubRelease -Repo `"ffuf/ffuf`" -Asset `"ffuf_*windows_amd64.zip`"`n`n"
+            Write-Host "    # Get the asset matching the pattern for a specific release:`n    Get-GithubRelease -Repo `"ffuf/ffuf`" -Asset `"ffuf_*windows_amd64.zip`" -Tag `"v2.0.0`"`n"
+            return
+        }
+
+        Write-Host "`nGet-GithubRelease Parameters:`n"
         Write-Host "    Repo:           $($Repo)"
         Write-Host "    List:           $List"
         Write-Host "    Asset:          $Asset"
@@ -99,11 +105,15 @@ function Get-GithubRelease {
         Write-Host "    SevenZipPath:   $SevenZipPath"
         Write-Host "    ExtractArchive: $ExtractArchive"
         Write-Host "    ExtractFolder:  $ExtractFolder"
-        Write-Host "    DeleteArchive:  $DeleteArchive"
-        Write-Host ""
+        Write-Host "    DeleteArchive:  $DeleteArchive`n"
     }
 
     PROCESS {
+
+        if (-not $Repo){
+            return
+        }
+
         # -------------------------------
         # LIST MODE: List releases and assets
         # -------------------------------
@@ -117,13 +127,11 @@ function Get-GithubRelease {
                 return
             }
 
-            Write-Host "    Release Assets:"
-            Write-Host ""
+            Write-Host "    Release Assets:`n"
             foreach ($release in $releases) {
-                Write-Host "-Tag `"$($release.tag_name)`""
-                Write-Host ""
+                Write-Host "    -Tag `"$($release.tag_name)`"`n"
                 foreach ($item in $release.assets) {
-                    Write-Host "-Asset `"$($item.name)`""
+                    Write-Host "    -Asset `"$($item.name)`""
                 }
                 Write-Host ""
             }
@@ -154,17 +162,16 @@ function Get-GithubRelease {
         # -------------------------------
         # FILTER ASSETS
         # -------------------------------
-        $releaseAsset = $release.assets | Where-Object { $_.name -like $Asset }
-
+        $releaseAsset = @($release.assets | Where-Object { $_.name -like $Asset })
         if ($releaseAsset.Count -ne 1) {
             if ($releaseAsset.Count -eq 0) {
-                Write-Host "No asset found matching '$Asset':`n"           
+                Write-Host "No asset found matching '$Asset':`n"
             }
             else {
-                Write-Host "Multiple assets found matching '$Asset':`n" 
+                Write-Host "Multiple assets found matching '$Asset':`n"
             }
             Write-Host "    Repo:           $($Repo)"
-            Write-Host "    Tag:     $($release.tag_name)`n"
+            Write-Host "    Tag:            $($release.tag_name)`n"
             Write-Host "    Available assets:`n"
             foreach ($item in $release.assets) {
                 Write-Host "    -Asset `"$($item.name)`""
@@ -182,10 +189,10 @@ function Get-GithubRelease {
 
         Write-Host "Downloading asset:`n"
         Write-Host "    Repo:           $($Repo)"
-        Write-Host "    Tag:     $($release.tag_name)"
+        Write-Host "    Tag:            $($release.tag_name)"
         Write-Host "    Filename:       $filename"
         Write-Host "    URL:            $downloadUrl"
-        Write-Host "    Path:           $localFile`n"
+        Write-Host "    Saved To:       $localFile`n"
 
         try {
             $ProgressPreference = 'SilentlyContinue'
@@ -205,11 +212,9 @@ function Get-GithubRelease {
                 return
             }
             try {
-                Write-Host "Extracting archive:"
-                Write-Host ""
+                Write-Host "Extracting archive:`n"
                 Write-Host "    Archive:        $localFile"
-                Write-Host "    Path:           $ExtractFolder"
-                Write-Host ""
+                Write-Host "    Extracted To:   $ExtractFolder`n"
                 & $SevenZipPath e $localFile -o"$ExtractFolder" -y > $null 2>&1
             }
             catch {
@@ -226,11 +231,9 @@ function Get-GithubRelease {
         # -------------------------------
         if ($DeleteArchive) {
             try {
-                Write-Host "Deleting archive:"
-                Write-Host ""
-                Write-Host "Archive:        $localFile`n"
-                Write-Host ""
-                
+                Write-Host "Deleting archive:`n"
+                Write-Host "    Archive:        $localFile`n"
+
                 Remove-Item -Path $localFile -Force
             }
             catch {
